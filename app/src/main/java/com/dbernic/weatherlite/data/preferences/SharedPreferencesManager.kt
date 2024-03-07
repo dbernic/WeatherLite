@@ -9,7 +9,6 @@ import javax.inject.Inject
 class SharedPreferencesManager @Inject constructor(
     private val sharedPreferences: SharedPreferences,
     private val gson: Gson,
-    val deviceId: String
 ) {
     val IS_GPS = "is_gps_use"
     val LAT_LON = "lat_lon_json"
