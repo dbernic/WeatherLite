@@ -30,7 +30,7 @@ fun NavGraph(navController: NavHostController = rememberNavController()) {
             )
         }
         composable(LOCATION) {
-            LocationScreen { navController.navigate(LIST) }
+            LocationScreen ( navigateList = { navController.navigate(LIST) } )
         }
         composable(LIST) {
             ListScreen (

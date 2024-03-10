@@ -32,14 +32,8 @@ object PersistenceModule {
     @Singleton
     fun provideSharedPreferencesManager(
         sharedPreferences: SharedPreferences,
-        gson: Gson,
-        @ApplicationContext context: Context,
     ): SharedPreferencesManager {
-        return SharedPreferencesManager(
-            sharedPreferences,
-            gson,
-            deviceId = Secure.getString(context.contentResolver, Secure.ANDROID_ID)
-        )
+        return SharedPreferencesManager( sharedPreferences )
     }
 
     @Singleton

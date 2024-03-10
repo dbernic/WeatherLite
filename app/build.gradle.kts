@@ -21,6 +21,8 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        buildConfigField("String", "API_KEY", "\"c27bdc2fbc0b84fb0ce53c6a1703cea9\"")
+        buildConfigField("String", "URL", "\"https://api.openweathermap.org\"")
     }
 
     buildTypes {
@@ -30,6 +32,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+
         }
     }
     compileOptions {
@@ -65,6 +68,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     implementation("androidx.navigation:navigation-compose:2.7.7")
+    implementation ("com.google.android.gms:play-services-location:21.2.0")
+    implementation("io.coil-kt:coil-compose:2.6.0")
 
     implementation("com.google.dagger:hilt-android:2.48.1")
     kapt("com.google.dagger:hilt-android-compiler:2.48.1")

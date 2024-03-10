@@ -1,6 +1,8 @@
 package com.dbernic.weatherlite.data.di
 
 import android.util.Log
+import com.dbernic.weatherlite.BuildConfig
+import com.dbernic.weatherlite.data.rest.RestApi
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -22,6 +24,25 @@ object NetworkModule {
 
     private const val NETWORK_TAG = "OkHttp"
     private const val DEFAULT_TIMEOUT = 60L
+
+    @Singleton
+    @Provides
+    fun providesApi(retrofit: Retrofit) : RestApi {
+        return retrofit.create(RestApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideRetrofit(
+        okHttpClient: OkHttpClient,
+        gsonConverterFactory: GsonConverterFactory
+    ): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(BuildConfig.URL)
+            .client(okHttpClient)
+            .addConverterFactory(gsonConverterFactory)
+            .build()
+    }
 
     @Singleton
     @Provides
@@ -66,22 +87,6 @@ object NetworkModule {
         }
     }
 
-    @Singleton
-    @Provides
-    fun provideAuthorizedOkHttpClient(
-        httpLoggingInterceptor: HttpLoggingInterceptor,
-    ): OkHttpClient {
-        val connectionPool = ConnectionPool(5, 30, SECONDS)
-
-        return OkHttpClient.Builder().apply {
-            connectTimeout(DEFAULT_TIMEOUT, SECONDS)
-            readTimeout(DEFAULT_TIMEOUT, SECONDS)
-            writeTimeout(DEFAULT_TIMEOUT, SECONDS)
-            addInterceptor(httpLoggingInterceptor)
-            connectionPool(connectionPool)
-            cache(null)
-        }.build()
-    }
 
 
 }

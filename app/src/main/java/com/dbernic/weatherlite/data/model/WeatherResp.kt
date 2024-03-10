@@ -9,6 +9,7 @@ data class WeatherResp (
 )
 
 data class Daily (
+    val dt: Long,
     val sunrise: Long,
     val sunset: Long,
     val summary: String,
@@ -16,7 +17,7 @@ data class Daily (
     val pressure: Int,
     val humidity: Int,
     @SerializedName("wind_speed") val windSpeed: Float,
-    val weather: Weather,
+    val weather: ArrayList<Weather>,
     val uvi: Float,
 )
 
